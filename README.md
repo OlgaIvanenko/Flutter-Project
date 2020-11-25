@@ -2,5 +2,5 @@
 
 ## Разработка UI для мобильного приложения
 
-![screenshot of sample] (https://github.com/OlgaIvanenko/Flutter-Project/tree/master/images/home_page.png)
+![screenshot of sample] (/images/home_page.png)
 рис. 1 - Домашняя страница
