@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:notebook/mocks/note_mock.dart';
+import 'package:notebook/models/note.dart';
+import 'package:notebook/pages/note_add.dart';
+import 'package:notebook/pages/search.dart';
 import 'package:notebook/pages/term_of_use.dart';
 import 'package:notebook/resources/strings.dart';
 import 'package:notebook/views/note_tile.dart';
+import 'package:flutter/widgets.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -10,19 +14,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Note get note => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: _buildAppTitle(),
         leading: IconButton(
-            icon: Icon(Icons.menu),
+          icon: Icon(Icons.menu),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (BuildContext context) => TermOfUse(),
+              ),
+            );
+          },
+        ),
+        actions: <Widget>[
+          IconButton(
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (BuildContext context) => TermOfUse()),
+              showSearch(
+                context: context,
+                delegate: Search(note),
               );
-            }),
+            },
+            icon: Icon(Icons.search),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -35,7 +54,13 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => NoteAdd(),
+            ),
+          );
+        },
         child: Icon(Icons.add),
       ),
     );
